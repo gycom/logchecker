@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Log Analyser</title>
+        <script type="text/javascript" src="js/app.js"></script>
+        <link rel="stylesheet" href="css/app.css" />
+    </head>
+    <body onload="OnLoad()">
+        <h1>Log Analysis</h1>
+        <select size=10 id="LogList" multiple onclick="ShowIISLog(this)"></select>
+        <div id="Content"></div>
+        <div id="SPContent"></div>
+        <script type="text/template" id="urllist">
+            <tr>
+                <td>
+                    <a 
+                            onclick="javascript:getSPLog(this)"
+                            href="/api/sp/INSERT_GRP_HERE/INSERT_FILE_HERE/INSERT_ESCAPE_URL_HERE"
+                        >INSERT_URL_HERE</a></td>
+                INSERT_NEXT_FILE_HERE
+            </tr>
+        </script>
+        <script type="text/template" id="urldetail">
+            <td align=right style="border-left:1px solid black">INSERT_COUNT_HERE</td>
+            <td align=right>INSERT_TOTAL_HERE</td>
+            <td align=right>INSERT_MEAN_HERE</td>
+            <td align="center">INSERT_ERROR_HERE</td>
+        </script>
+        <script type="text/template" id="splist">
+            <tr>
+                <td>INSERT_SPNAME_HERE</td>
+                <td>INSERT_COUNT_HERE</td>
+                <td>INSERT_TOTAL_HERE</td>
+                <td>INSERT_MEAN_HERE</td>
+                <td>INSERT_ERROR_HERE</td>
+            </tr>
+        </script>
+    </body>
+</html>

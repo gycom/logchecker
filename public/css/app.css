@@ -1,0 +1,62 @@
+body
+{
+    margin:0;
+}
+
+h1
+{
+    background-color:black;
+    color:white;
+    font-family: Verdana;
+    
+}
+a
+{
+    text-decoration:none;
+    color:black;
+}
+#LogList
+{
+    width:150px;
+    height:300px;
+    float:left;
+    margin-right:20px;
+}
+#Content
+{
+    float:left;
+    padding-left:10px;
+    padding-right:10px;
+}
+#SPContent
+{
+    float:left;
+    padding-left:10px;
+    padding-right:10px;
+}
+table
+{
+    border-spacing : 0;
+    border-collapse : collapse;
+    font-size:9px;
+}
+table tr:nth-child(odd) td{
+    background-color:#eee;
+}
+table tr:nth-child(even) td{
+    background-color:#fff;
+}
+table tr:first-child td{
+    background-color:black;
+    color:white;
+    font-weight:bolder;
+    font-family:Arial;
+}
+table tr:first-child td a{
+    background-color:black;
+    color:white;
+}
+a:hover
+{
+    background-color:yellow;
+}
