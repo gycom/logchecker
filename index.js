@@ -10,7 +10,7 @@ app.get("/api/log/list",getLogList)
 app.get("/api/log/:grp/:file",getIISLogStat);
 app.get("/api/sp/:grp/:file/:url",getSessionLogStat);
 app.get("/api/sp/:grp/:file",getSessionLogStat);
-app.listen(3000);
+app.listen(3000,()=>console.log("Running on port 3000"));
 
 function defaultPage(req,res)
 {
