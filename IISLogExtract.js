@@ -2,7 +2,7 @@ function logExtractor(param, callback)
 {
 
     const fs = require("fs");
-    var log = "./LOG/" + param.group + "/" + param.filename;
+    var log = __dirname + "/LOG/" + param.group + "/" + param.filename;
     const stream = require("stream");
     const readline = require("readline");
 

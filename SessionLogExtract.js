@@ -1,7 +1,7 @@
 function sessionLogExtractor(param,callback)
 {
     console.log(param);
-    var log = "./LOG/" + param.group + "/20" + param.filename.substr(4,6)+"-0300/all.txt";
+    var log = __dirname + "/LOG/" + param.group + "/20" + param.filename.substr(4,6)+"-0300/all.txt";
     var urlfilter = param.url||"";
     console.log("filter",urlfilter)
     const fs = require("fs");
