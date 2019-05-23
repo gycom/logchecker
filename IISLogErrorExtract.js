@@ -1,4 +1,4 @@
-function logExtractor(param, callback)
+function logErrorExtractor(param, callback)
 {
 
     const fs = require("fs");
@@ -8,7 +8,7 @@ function logExtractor(param, callback)
 
     var fieldlist = [];
     var statPage = {};
-
+    var errorlist = [];
     const outstream = new stream;
     outstream.readable=true;
     outstream.writable=true;
@@ -49,13 +49,13 @@ function logExtractor(param, callback)
         }
         else
         {
-            countDistinctPage(line.split(" "));
+            collectError(line.split(" "));
         }
         function setCurrentFields(fld)
         {
             fieldlist = fld.slice(1);
         }
-        function countDistinctPage(fld)
+        function collectError(fld)
         {
             //#Fields: date time cs-method cs-uri-stem cs-uri-query c-ip cs-host sc-status sc-substatus sc-win32-status time-taken
             var posURL = fieldlist.indexOf("cs-uri-stem");
@@ -67,20 +67,31 @@ function logExtractor(param, callback)
             var time = +fld[posTIME];
             var status = fld[posSTATUS];
             var errormsg = fld[posError];
-
-            if (!statPage[url]) statPage[url] = {url:url, count:0, totaltime:0, status: {}};
+            if (status!="200" && status!="304")
+            {
+              //  if (errormsg!='-' )
+                    errorlist.push({same:url==param.url,url:url,param:param.url,line:fld.join(" ")})
+            }
+/*            if (!statPage[url]) statPage[url] = {url:url, count:0, totaltime:0, status: {}};
             statPage[url].count++;
             statPage[url].totaltime += time/1000/60; // in minutes
-            if (status!="200" && status!="304" && errormsg!="|-|ASP_0147|500_Server_Error" && errormsg!="-")
+            if (status!="200")
             {
                 if (!statPage[url].status[status]) statPage[url].status[status] = 1;
                 statPage[url].status[status]++;
-            }
+            }*/
         }
     }
 
+    function renderLog(e)
+    {
+        return e.line;
+    }
     function finishLog()
     {
+        var onlySame = (e)=>e.same==true;
+        callback("<pre>"+errorlist.filter(onlySame).map(renderLog).join("<br>") + "</pre>");
+        return;
         var by = (field,type) => (a,b) => a[field] > b[field] ? (type=="desc"?-1:1) : a[field] < b[field] ? (type=="desc"?1:-1) : 0;
         var statRank = Object.keys(statPage).map(KeyToArray).slice()
                         .sort(by("totaltime_in_min","desc"))
@@ -108,4 +119,4 @@ function logExtractor(param, callback)
         }
     }
 }
-module.exports = logExtractor;
+module.exports = logErrorExtractor;

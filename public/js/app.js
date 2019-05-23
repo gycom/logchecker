@@ -104,7 +104,8 @@ function BuildIISLogStat(urllist,ndx)
             "INSERT_COUNT_HERE":    e.count,
             "INSERT_TOTAL_HERE":    e.totaltime_in_min,
             "INSERT_MEAN_HERE":     e.meantime_in_sec,
-            "INSERT_ERROR_HERE":    JSON.stringify(e.status)
+            "INSERT_ERROR_HERE":    JSON.stringify(e.status),
+            "INSERT_ESCAPE_URL_HERE": encodeURIComponent(e.url),
         };
         return templateRender(TEMPLATE.urldetail,mapping)+ ((ndx<logarray.length-1) ? detailNextRender(e.url,ndx+1) : "");
     }

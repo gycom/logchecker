@@ -10,6 +10,8 @@ app.get("/api/log/list",getLogList)
 app.get("/api/log/:grp/:file",getIISLogStat);
 app.get("/api/sp/:grp/:file/:url",getSessionLogStat);
 app.get("/api/sp/:grp/:file",getSessionLogStat);
+app.get("/api/err/:grp/:file/:url",getErrorStat);
+
 app.listen(3000,()=>console.log("Running on port 3000"));
 
 function defaultPage(req,res)
@@ -50,5 +52,17 @@ function getSessionLogStat(req,res)
             url:        req.params.url
         },
         logStat=>res.send(JSON.stringify(logStat))
+    );
+}
+
+function getErrorStat(req,res)
+{
+    var logErrorExtractor = require("./IISLogErrorExtract");
+    logErrorExtractor({
+            group:      req.params.grp,
+            filename:   req.params.file,
+            url: req.params.url
+        },
+        logStat=>res.send(logStat)
     );
 }
