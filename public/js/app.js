@@ -1,6 +1,8 @@
 var TEMPLATE={};
 var logarray = [];
-
+const ganttIcon = "<a href='/graph/INSERT_GRP_HERE/INSERT_FILE_HERE' target='_blank'>"
+                    +"<img src='css/gantt.png' width=16 height=16 style='background-color:white;float:left' />"
+                    +"</a>";
 function OnLoad()
 {
     console.log("OnLoad");
@@ -85,6 +87,8 @@ function BuildIISLogStat(urllist,ndx)
     var div = document.getElementById("Content");
     var html =  MakeTable("url",titleRender(ndx) + urllist.map(urlRender).join(""),[300].concat(Repeat([50,50,50,100],logarray.length)));
     div.innerHTML = html;
+    var div = document.getElementById("SPContent");
+    div.innerHTML = "";
     function urlRender(e)
     {
         var mapping = {
@@ -138,7 +142,7 @@ function BuildIISLogStat(urllist,ndx)
         var mapping = {
             "INSERT_NEXT_FILE_HERE": TEMPLATE.urldetail,
             "INSERT_COUNT_HERE":    "COUNT<br>" + logarray[ndx].req.file,
-            "INSERT_TOTAL_HERE":    "Total time<br>(in minutes)",
+            "INSERT_TOTAL_HERE":    "Total time<br>(in minutes)"+ganttIcon,
             "INSERT_MEAN_HERE":     "Mean time<br>(in seconds)",
             "INSERT_ERROR_HERE":    "Error page"
         };

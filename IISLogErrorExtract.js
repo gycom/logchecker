@@ -16,17 +16,17 @@ function logErrorExtractor(param, callback)
     var startTime, endTime;
 
     function start() {
-    startTime = new Date();
+        startTime = new Date();
     };
 
     function end() {
-    endTime = new Date();
-    var timeDiff = endTime - startTime; //in ms
-    // strip the ms
+        endTime = new Date();
+        var timeDiff = endTime - startTime; //in ms
+        // strip the ms
 
-    // get seconds 
-    var seconds = Math.round(timeDiff*100)/100;
-    console.log(seconds + " ms");
+        // get seconds 
+        var seconds = Math.round(timeDiff*100)/100;
+        console.log(seconds + " ms");
     }
 
     start();
@@ -70,7 +70,12 @@ function logErrorExtractor(param, callback)
             if (status!="200" && status!="304")
             {
               //  if (errormsg!='-' )
-                    errorlist.push({same:url==param.url,url:url,param:param.url,line:fld.join(" ")})
+                    errorlist.push({
+                        same:   url==param.url || param.url=="INSERT_ESCAPE_URL_HERE",
+                        url:    url,
+                        param:  param.url,
+                        line:   fld.join(" ")
+                    });
             }
 /*            if (!statPage[url]) statPage[url] = {url:url, count:0, totaltime:0, status: {}};
             statPage[url].count++;

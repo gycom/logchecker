@@ -11,6 +11,9 @@ app.get("/api/log/:grp/:file",getIISLogStat);
 app.get("/api/sp/:grp/:file/:url",getSessionLogStat);
 app.get("/api/sp/:grp/:file",getSessionLogStat);
 app.get("/api/err/:grp/:file/:url",getErrorStat);
+app.get("/api/err/:grp/:file",getErrorStat);
+app.get("/graph/:grp/:file",goGraphPage)
+app.get("/api/graph/:grp/:file",getGraphData);
 
 app.listen(3000,()=>console.log("Running on port 3000"));
 
@@ -64,5 +67,18 @@ function getErrorStat(req,res)
             url: req.params.url
         },
         logStat=>res.send(logStat)
+    );
+}
+
+function goGraphPage(req,res)
+{
+    res.sendFile(__dirname + "/public/graph.html");//"graph of file " + req.params.grp + "/" + req.params.file);
+}
+
+function getGraphData(req,res)
+{
+    var iisGraphData = require("./IISGraphData");
+    iisGraphData(req.params,(data)=>
+        res.send(JSON.stringify(data))
     );
 }

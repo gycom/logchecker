@@ -1,0 +1,60 @@
+body
+{
+    background-color: #ccc;
+}
+.bar
+{
+}
+.punch
+{
+    border-top: 3px solid black;
+}
+.refresh
+{
+    display:none;
+}
+.erp
+{
+    border-top: 1px solid white;
+}
+.yellow
+{
+    background-color:#ff0;
+}
+.green
+{
+    background-color:#0f0;
+}
+.blue
+{
+    background-color:#00F;
+}
+.red
+{
+    background-color:#f00;
+}
+.even
+{
+    background-color:#a4a4a4;
+}
+.odd
+{
+    background-color:#a0a0a0;
+}
+#timetable
+{
+    position:absolute;
+    top:90px;
+    z-index:1;
+    border:1px #0918eb solid;
+}
+#Content
+{
+    position:absolute;
+    top:100px;
+    z-index:10;
+}
+table { 
+    border-spacing: 0;
+    border-collapse: collapse;
+}
