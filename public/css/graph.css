@@ -7,7 +7,7 @@ body
 }
 .punch
 {
-    border-top: 3px solid black;
+    border-top: 3px solid white;
 }
 .refresh
 {
@@ -35,11 +35,11 @@ body
 }
 .even
 {
-    background-color:#a4a4a4;
+    background-color:#000000;
 }
 .odd
 {
-    background-color:#a0a0a0;
+    background-color:#202020;
 }
 #timetable
 {

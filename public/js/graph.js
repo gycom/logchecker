@@ -1,6 +1,8 @@
 
 var iplist = [];
-const SECOND_PER_PIXEL = 40;
+const SECOND_PER_PIXEL = 80;
+var cachedata = [];
+var zoomfilter = null;
 function init()
 {
     var link = window.location.href;
@@ -15,6 +17,8 @@ function init()
 
 function BuildGraph(data)
 {
+    if (cachedata.length==0)
+        cachedata = data
     var div = document.getElementById("Content");
     var txt = document.getElementById("trace");
     iplist = data.reduce((t,e)=>{var tt=t;if(!tt.includes(e.IP)){tt.push(e.IP); };return tt;},[]);
@@ -27,7 +31,7 @@ function BuildGraph(data)
 function makeBar(e)
 {
     var width = secToPixel(msToSec(+e.time));
-    var right = secToPixel(hrToSec(e.DT));
+    var right = secToPixel(hrToSec(e.DT)- (zoomfilter?zoomfilter*3600:0));
     var left = right - width;
     var style = [
         ";position:","absolute",
@@ -59,10 +63,18 @@ function hrToSec(dt)
 }
 function secToPixel(sec)
 {
-    return Math.ceil(sec / SECOND_PER_PIXEL * 4) / 4;
+    return Math.ceil((sec*(zoomfilter?24:1)) / SECOND_PER_PIXEL * 4) / 4;
 }
 
 function ColorOfStatus(s)
 {
     return ["#ff0","#0f0","#f00","#00f"][["200","500","404"].indexOf(s)+1];
+}
+
+function ZoomHr()
+{
+    var hr = window.event.srcElement.getAttribute("hr");
+    zoomfilter = hr;
+    BuildGraph(cachedata.filter(e=>Math.floor(hrToSec(e.DT)/3600)==+hr ));
+    
 }
