@@ -29,8 +29,11 @@ function getLogList(req,res)
     folders.forEach(SendLogList)
     function SendLogList(fld)
     {
-        var files = fs.readdirSync(__dirname+"/LOG/"+fld);
-        list[fld] = files.filter(e=>e.substr(-4)==".log" && e.substr(0,4)=="u_ex");
+        if (fs.lstatSync(__dirname+"/LOG/"+fld).isDirectory())
+        {
+            var files = fs.readdirSync(__dirname+"/LOG/"+fld);
+            list[fld] = files.filter(e=>e.substr(-4)==".log" && e.substr(0,4)=="u_ex");
+        }
     }
     res.send(JSON.stringify(list))
 }
