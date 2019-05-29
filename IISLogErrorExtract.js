@@ -63,10 +63,10 @@ function logErrorExtractor(param, callback)
             var posSTATUS = fieldlist.indexOf("sc-status");
             var posError = fieldlist.indexOf("cs-uri-query");
 
-            var url = fld[posURL].toLowerCase();
-            var time = +fld[posTIME];
-            var status = fld[posSTATUS];
-            var errormsg = fld[posError];
+            var url = (fld[posURL]||"").toLowerCase();
+            var time = +(fld[posTIME]||0);
+            var status = fld[posSTATUS]||"";
+            var errormsg = fld[posError]||"";
             if (status!="200" && status!="304")
             {
               //  if (errormsg!='-' )

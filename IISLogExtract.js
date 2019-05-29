@@ -57,16 +57,17 @@ function logExtractor(param, callback)
         }
         function countDistinctPage(fld)
         {
+            //console.log(fieldlist)
             //#Fields: date time cs-method cs-uri-stem cs-uri-query c-ip cs-host sc-status sc-substatus sc-win32-status time-taken
             var posURL = fieldlist.indexOf("cs-uri-stem");
             var posTIME = fieldlist.indexOf("time-taken");
             var posSTATUS = fieldlist.indexOf("sc-status");
             var posError = fieldlist.indexOf("cs-uri-query");
 
-            var url = fld[posURL].toLowerCase();
-            var time = +fld[posTIME];
-            var status = fld[posSTATUS];
-            var errormsg = fld[posError];
+            var url = (fld[posURL]||"").toLowerCase();
+            var time = +(fld[posTIME]||0);
+            var status = fld[posSTATUS]||"";
+            var errormsg = fld[posError]||"";
 
             if (!statPage[url]) statPage[url] = {url:url, count:0, totaltime:0, status: {}};
             statPage[url].count++;

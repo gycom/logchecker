@@ -54,11 +54,11 @@ function ExtractRequest(param, callback)
             var posTIME = fieldlist.indexOf("time-taken");
             var posSTATUS = fieldlist.indexOf("sc-status");
 
-            var url = fld[posURL].toLowerCase();
-            var IP = fld[posIP];
-            var DT = fld[posD] + " " + fld[posT];
-            var time = +fld[posTIME];
-            var status = fld[posSTATUS];
+            var url = (fld[posURL]||"").toLowerCase();
+            var IP = fld[posIP]||"";
+            var DT = (fld[posD]||"") + " " + (fld[posT]||"");
+            var time = +(fld[posTIME]||0);
+            var status = fld[posSTATUS]||"";
             requestlist.push({
                 IP:         IP,
                 DT:         DT,
